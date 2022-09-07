@@ -34,19 +34,49 @@ if __name__ == "__main__":
     senhas = Fila()
     senhasChamadas = Fila()
     contador = 0
+    print("Gerenciador de Senhas\n")
+    
     while True:
         print("1) Obter nova senha\n2) Chamar próxima senha\n3) Mostrar senhas chamadas\n4) Sair\n")
         escolha = str(input("Escolha uma opção:"))
         if escolha == "1":
-            pass
+            limpaTela()
+            while True:
+              print("Digite uma nova senha:")
+              novaSenha = str(input())
+              if novaSenha != "":
+                senhas.enqueue(novaSenha)
+                limpaTela()
+                print("Senha criada com sucesso!\n")
+                break
+              else:
+                limpaTela()
+                print("A senha não pode estar em branco!\n")
+            contador+=1
+            
         elif escolha == "2":
-            pass
+            limpaTela()
+            if senhas.is_empty() is False:
+                print("A sua senha é:",senhas.front(),"\n")
+                senhasChamadas.enqueue(senhas.front())
+                senhas.dequeue()
+            else:
+                print("Nenhuma senha foi criada!\n")
+
         elif escolha == "3":
-            pass
+            limpaTela()
+            if senhasChamadas.is_empty() is False:
+                print("Senhas Chamadas:")
+                print(senhasChamadas.__str__())
+                print()
+            else:
+                print("Nenhuma senha foi chamada!\n")
+
         elif escolha == "4":
             limpaTela()
             print("Você escolheu sair")
             break
+
         else:
             limpaTela()
             print("Escolha uma opção válida!\n")
